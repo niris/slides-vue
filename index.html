@@ -1,0 +1,37 @@
+<!DOCTYPE html> <!-- Page Example -->
+<link rel="stylesheet" href="https://unpkg.com/chota">
+<script src="https://unpkg.com/vue"></script>
+<script src="https://unpkg.com/vue-router"></script>
+<style>
+  output{white-space:pre;font-family:monospace;display: block;}
+  nav{background: #3b5998;}
+  nav.tabs>a{color:white}
+  article{max-width: 600px;margin: auto}
+  .comment {padding-left: 2em;}
+  .post {margin: 1em 0;}
+  :root{
+    --color-primary:#3b5998;
+  }
+</style>
+<main>
+ <nav class="tabs is-full ">
+  <a is=router-link :to="'/'">Posts List</a>
+  <a is=router-link :to="'/about'">About</a>
+  <a is=router-link :to="'/chat'">chat</a>
+ </nav>
+ <router-view />
+</main>
+<script type="module">
+import PostsPage from "/static/posts.js";
+import AboutPage from "/static/about.js";
+import ChatPage from "/static/chat.js";
+import E404Page from "/static/e404.js";
+let routes = [
+  { path: '/',     component: PostsPage},
+  { path: '/about', component: AboutPage},
+  { path: '/chat', component: ChatPage},
+  { path: '*',     component: E404Page},
+]; // mode = "history"
+let router = new VueRouter({routes})
+let app = new Vue( {el: 'main', router})
+</script>
